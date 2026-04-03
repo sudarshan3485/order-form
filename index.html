@@ -62,13 +62,8 @@
                 <h3>Request a Quote / Place Order</h3>
                 <p class="form-instructions">Fill this form with your preferred colour, size & quantity to proceed.</p>
                 
-                <!-- REPLACING email with Web3Forms OR Formspree pattern, using FormSubmit -->
-                <form id="lead-form" action="https://formsubmit.co/your-email@example.com" method="POST">
-                    <!-- Disable captcha for seamless experience -->
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_subject" value="New Nehru Jacket Order Inquiry!">
-                    <input type="hidden" name="_template" value="table">
-                    <!-- Optional: add success page url -> <input type="hidden" name="_next" value="http://yourdomain.com/thanks.html"> -->
+                <!-- Form submitting to our serverless function via JS -->
+                <form id="lead-form">
                     
                     <div class="form-group row">
                         <div class="input-container">
@@ -142,7 +137,9 @@
                         <div class="spinner"></div>
                     </button>
                     
-                    <p class="email-note"><strong>IMPORTANT:</strong> Edit index.html (line 52) and replace `your-email@example.com` with your real email to receive leads.</p>
+                    <div id="form-message" style="margin-top: 15px; text-align: center; color: green; display: none;"></div>
+                    
+                    <p class="email-note"><strong>IMPORTANT:</strong> Make sure you have added your RESEND_API_KEY in Vercel settings, and update the "to" email address in api/send-email.js</p>
                 </form>
             </div>
         </div>

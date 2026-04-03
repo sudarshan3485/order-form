@@ -86,13 +86,71 @@ document.addEventListener('DOMContentLoaded', () => {
         updateRemoveButtons();
     });
 
-    // Form submission animation (optional UX enhancement)
+    // Form submission processing
     const form = document.getElementById('lead-form');
     const submitBtn = document.getElementById('submitBtn');
+    const formMessage = document.getElementById('form-message');
 
-    form.addEventListener('submit', () => {
-        // Just add loading state while formsubmit processes the request
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Add loading state
         submitBtn.classList.add('loading');
-        // Let the form submit naturally
+        submitBtn.disabled = true;
+        formMessage.style.display = 'none';
+
+        try {
+            // Collect order items
+            const items = [];
+            const itemRows = document.querySelectorAll('.order-item');
+            
+            itemRows.forEach(row => {
+                const color = row.querySelector('select[name="color[]"]').value;
+                const size = row.querySelector('select[name="size[]"]').value;
+                const quantity = row.querySelector('input[name="quantity[]"]').value;
+                
+                if (color && size && quantity) {
+                    items.push({ color, size, quantity });
+                }
+            });
+
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                company: document.getElementById('company').value,
+                message: document.getElementById('message').value,
+                items: items
+            };
+
+            const response = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                formMessage.textContent = "Your inquiry has been sent successfully!";
+                formMessage.style.color = "green";
+                formMessage.style.display = "block";
+                form.reset();
+                calculateTotalPrice(); // Reset price
+            } else {
+                throw new Error(data.error || 'Failed to send');
+            }
+        } catch (error) {
+            console.error(error);
+            formMessage.textContent = "There was an error sending your inquiry. Please try again later.";
+            formMessage.style.color = "red";
+            formMessage.style.display = "block";
+        } finally {
+            // Remove loading state
+            submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
+        }
     });
 });
