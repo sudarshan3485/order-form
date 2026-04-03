@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Timeless Nehru Jacket - Premium Hemp/Cotton Weave</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <div class="image-gallery">
+                <div class="main-image-container">
+                    <img id="main-product-image" src="assets/product1.jpeg" alt="Nehru Jacket Main">
+                </div>
+                <div class="thumbnail-container">
+                    <img class="thumbnail active" src="assets/product1.jpeg" alt="Thumbnail 1" onclick="changeImage(this)">
+                    <img class="thumbnail" src="assets/product2.jpeg" alt="Thumbnail 2" onclick="changeImage(this)">
+                    <img class="thumbnail" src="assets/product3.jpeg" alt="Thumbnail 3" onclick="changeImage(this)">
+                </div>
+            </div>
+        </div>
+        
+        <div class="right-section">
+            <header>
+                <span class="badge">Premium Collection</span>
+                <h1>The Timeless Nehru Jacket</h1>
+                <p class="subtitle">70/30 Hemp & Cotton Matt Weave</p>
+            </header>
+
+            <div class="product-description">
+                <p><strong>Hemp</strong>, one of the world's oldest textiles, is known for its quiet strength, breathability, and natural elegance.</p>
+                <p>We've brought this together with the timeless Nehru jacket in a structured, refined fabric — ideal for modern wardrobes.</p>
+                
+                <div class="details-grid">
+                    <div class="detail-item">
+                        <span class="detail-label">Colours</span>
+                        <span class="detail-value">Blue, Green, Natural</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Sizes</span>
+                        <span class="detail-value">S to 3XL</span>
+                    </div>
+                </div>
+
+                <div class="pricing-box">
+                    <div class="price-item">
+                        <span class="price-type">Single Piece</span>
+                        <span class="price-amount">₹6,000</span>
+                    </div>
+                    <div class="price-item bulk">
+                        <span class="price-type">Bulk (10–15 pcs)</span>
+                        <span class="price-amount">₹3,600 <span class="per-piece">/ piece</span></span>
+                    </div>
+                </div>
+                
+                <p class="dispatch-notice">⚡ We can support quick dispatch.</p>
+            </div>
+
+            <div class="form-container">
+                <h3>Request a Quote / Place Order</h3>
+                <p class="form-instructions">Fill this form with your preferred colour, size & quantity to proceed.</p>
+                
+                <!-- REPLACING email with Web3Forms OR Formspree pattern, using FormSubmit -->
+                <form id="lead-form" action="https://formsubmit.co/your-email@example.com" method="POST">
+                    <!-- Disable captcha for seamless experience -->
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_subject" value="New Nehru Jacket Order Inquiry!">
+                    <input type="hidden" name="_template" value="table">
+                    <!-- Optional: add success page url -> <input type="hidden" name="_next" value="http://yourdomain.com/thanks.html"> -->
+                    
+                    <div class="form-group row">
+                        <div class="input-container">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required placeholder="Enter your name">
+                        </div>
+                        <div class="input-container">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required placeholder="Enter your email">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="input-container">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+                        </div>
+                        <div class="input-container">
+                            <label for="company">Company (Optional)</label>
+                            <input type="text" id="company" name="company" placeholder="Enter your company name">
+                        </div>
+                    </div>
+
+                    <div class="order-items-wrapper">
+                        <label>Order Details *</label>
+                        <p class="form-instructions" style="margin-bottom: 0.8rem; font-size: 0.85rem;">Select your colour, size, and quantity. Click "+ Add Another Item" for multiple variations.</p>
+                        
+                        <div id="order-items-list">
+                            <div class="order-item row" style="grid-template-columns: 1.5fr 1fr 1fr auto; align-items: center; margin-bottom: 0.8rem;">
+                                <div class="input-container">
+                                    <select name="color[]" required>
+                                        <option value="" disabled selected>Colour</option>
+                                        <option value="Blue">Blue</option>
+                                        <option value="Green">Green</option>
+                                        <option value="Natural">Natural</option>
+                                    </select>
+                                </div>
+                                <div class="input-container">
+                                    <select name="size[]" required>
+                                        <option value="" disabled selected>Size</option>
+                                        <option value="S">S</option>
+                                        <option value="M">M</option>
+                                        <option value="L">L</option>
+                                        <option value="XL">XL</option>
+                                        <option value="2XL">2XL</option>
+                                        <option value="3XL">3XL</option>
+                                    </select>
+                                </div>
+                                <div class="input-container">
+                                    <input type="number" name="quantity[]" min="1" required placeholder="Qty" class="qty-input">
+                                </div>
+                                <button type="button" class="remove-item-btn" disabled title="Remove item">&times;</button>
+                            </div>
+                        </div>
+                        
+                        <div class="order-actions row" style="align-items: center; margin-bottom: 1.2rem;">
+                            <button type="button" id="add-item-btn" class="secondary-btn" style="margin-bottom: 10px;">+ Add Another Item</button>
+                            <div class="quantity-hint" id="dynamic-pricing" style="padding-bottom: 0;">
+                                <span class="hint-text">Estimated Price: <strong id="est-price">₹0</strong></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Additional Requirements</label>
+                        <textarea id="message" name="message" rows="3" placeholder="Any specific details on dispatch, packing, etc."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <span class="btn-text">Send Enquiry</span>
+                        <div class="spinner"></div>
+                    </button>
+                    
+                    <p class="email-note"><strong>IMPORTANT:</strong> Edit index.html (line 52) and replace `your-email@example.com` with your real email to receive leads.</p>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
