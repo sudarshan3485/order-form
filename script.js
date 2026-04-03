@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (error) {
             console.error(error);
-            formMessage.textContent = "There was an error sending your inquiry. Please try again later.";
+            formMessage.textContent = "Error: " + error.message;
             formMessage.style.color = "red";
             formMessage.style.display = "block";
         } finally {

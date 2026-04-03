@@ -47,6 +47,9 @@ export default async function handler(req, res) {
 
     } catch (error) {
         console.error('Error sending email:', error);
-        return res.status(500).json({ error: 'Failed to send email' });
+        return res.status(500).json({ 
+            error: error.message || 'Failed to send email',
+            details: 'Check your Vercel logs or Resend dashboard for more info.'
+        });
     }
 }
